@@ -33,6 +33,10 @@ public class Contato {
 	public String getNome() {
 		return nome;
 	}
+	
+	public boolean isNovo() {
+		return id == null;
+	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
