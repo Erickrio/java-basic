@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -51,5 +52,26 @@ public class ContatosControle {
 		contato.setId(id);
 		LISTA_CONTATOS.add(contato);
 		return "redirect:/contatos";
+	}
+	
+	@GetMapping("/contatos/{id}/editar")
+	public ModelAndView editar(@PathVariable String id) {
+		ModelAndView modelAndView = new ModelAndView("formulario");
+		Contato contato = procurarContato(id);
+		modelAndView.addObject("contato",contato);
+		return modelAndView;
+	
+	}
+
+	public Contato procurarContato(String id) {
+		for(int i = 0; i < LISTA_CONTATOS.size() ; i++) { 	//arrayList = size | lenght = array
+			//pega o contato referenter ao indice
+			Contato contato  = LISTA_CONTATOS.get(i);
+			if (contato.getId().equals(id)) {
+				return contato;
+			}
+			
+		}
+		return null;
 	}
 }
